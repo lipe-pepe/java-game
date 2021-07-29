@@ -70,6 +70,25 @@ public class Game extends Canvas implements Runnable {
 	
 	public void render() {
 		
+<<<<<<< Updated upstream
+=======
+		BufferStrategy bs = this.getBufferStrategy();
+		if (bs == null) {
+			this.createBufferStrategy(3);
+			return;
+		}
+		
+		Graphics g = layer.getGraphics();
+		g.setColor(new Color(192,237,237));
+		g.fillRect(0, 0, FRAME_WIDTH, FRAME_HEIGHT);
+		player.render(g);
+		
+		// We finally draw the graphics:
+		g = bs.getDrawGraphics();
+		g.drawImage(layer, 0, 0, FRAME_WIDTH*GAME_SCALE, FRAME_HEIGHT*GAME_SCALE, null);
+		
+		bs.show();
+>>>>>>> Stashed changes
 		
 	}
 	
