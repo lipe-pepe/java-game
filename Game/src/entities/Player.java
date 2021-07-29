@@ -9,14 +9,26 @@ package entities;
 import java.awt.Color;
 import java.awt.Graphics;
 
+import main.Game;
+
 public class Player {
 
 	
-	public int posX;
-	public int posY;
+	public double posX;
+	public double posY;
 	
 	public int width;
 	public int height;
+	
+	public double horizontalSpeed = 1.5f;
+	public double verticalSpeed = 0.8f;
+	
+	// Controller variables:
+	public boolean right;
+	public boolean left;
+	public boolean up;
+	public boolean down;
+	
 	
 	
 // --------------------------------------------------------------------------------------------------------- //
@@ -24,7 +36,7 @@ public class Player {
 	
 	/* The constructor of the player */
 	
-	public Player(int x, int y, int width, int height) {
+	public Player(double x, double y, int width, int height) {
 		
 		this.posX = x;
 		this.posY = y;
@@ -39,7 +51,39 @@ public class Player {
 	/* The tick method contains the player's logic */
 	public void tick() {
 		
+	// --- Controller: ---
 		
+		// Moving right or left:
+		if (right) {
+			posX += horizontalSpeed;
+		}
+		else if (left) {
+			posX -= horizontalSpeed;
+		}
+		
+		// Moving up or down:
+		if (up) {
+			posY -= verticalSpeed;
+		}
+		else if (down) {
+			posY += verticalSpeed;
+			System.out.println("GOING DOWN, posY: " + posY);
+		}
+		
+		// Boundaries:
+		if (posX + width > Game.FRAME_WIDTH) {
+			posX = Game.FRAME_WIDTH - width;
+		}
+		else if (posX < 0) {
+			posX = 0;
+		}
+		
+		if (posY + height > Game.FRAME_HEIGHT) {
+			posY = Game.FRAME_HEIGHT - height;
+		}
+		else if (posY < 0) {
+			posY = 0;
+		}
 		
 		
 	}
@@ -50,9 +94,9 @@ public class Player {
 	/* The render method does all of the player rendering. */
 	public void render(Graphics g) {
 		
-		/* Rendering the player as a rectangle while we don't have sprites */
+		/* Rendering the player as a rectangle while we don't have sprites: */
 		g.setColor(Color.GREEN);
-		g.drawRect(posX, posY, width, height);
+		g.drawRect((int) posX, (int) posY, width, height);
 		
 		
 	}
