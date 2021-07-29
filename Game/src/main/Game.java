@@ -9,8 +9,14 @@ package main;
 
 import java.awt.Canvas;
 import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
 
 import javax.swing.JFrame;
+
+import entities.Player;
+
 
 public class Game extends Canvas implements Runnable {
 	
@@ -21,6 +27,12 @@ public class Game extends Canvas implements Runnable {
 	public static int SCREEN_HEIGHT = 300;
 	
 	public static int GAME_SCALE = 3;
+	
+	// We use an image as a layer to render the game.
+	public BufferedImage layer = new BufferedImage(SCREEN_WIDTH, SCREEN_HEIGHT, BufferedImage.TYPE_INT_RGB);
+	
+	// The game objects:
+	public static Player player;
 
 	
 // ----------------------------------------------------------------------------------------------------------------- //
@@ -30,6 +42,9 @@ public class Game extends Canvas implements Runnable {
 	
 	public Game() {
 		this.setPreferredSize(new Dimension(SCREEN_WIDTH*GAME_SCALE, SCREEN_HEIGHT*GAME_SCALE));
+		
+		player = new Player(50, 50, 20, 8);
+		
 	}
 	
 	
@@ -61,6 +76,8 @@ public class Game extends Canvas implements Runnable {
 	
 	public void tick() {
 		
+		player.tick();
+		
 	}
 	
 	
@@ -70,6 +87,20 @@ public class Game extends Canvas implements Runnable {
 	
 	public void render() {
 		
+		BufferStrategy bs = this.getBufferStrategy();
+		if (bs == null) {
+			this.createBufferStrategy(3);
+			return;
+		}
+		
+		Graphics g = layer.getGraphics();
+		player.render(g);
+		
+		// We finally draw the graphics:
+		g = bs.getDrawGraphics();
+		g.drawImage(layer, 0, 0, SCREEN_WIDTH*GAME_SCALE, SCREEN_HEIGHT*GAME_SCALE, null);
+		
+		bs.show();
 		
 	}
 	
