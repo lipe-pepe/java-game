@@ -8,6 +8,7 @@ package entities;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 
 import main.Game;
 
@@ -19,6 +20,8 @@ public class Player {
 	
 	public int width;
 	public int height;
+	
+	protected BufferedImage sprite;
 	
 	public double horizontalSpeed = 1.5f;
 	public double verticalSpeed = 0.8f;
@@ -36,12 +39,15 @@ public class Player {
 	
 	/* The constructor of the player */
 	
-	public Player(double x, double y, int width, int height) {
+	public Player(double x, double y, int width, int height, BufferedImage sprite) {
 		
 		this.posX = x;
 		this.posY = y;
 		this.width = width;
 		this.height = height;
+		this.sprite = sprite;
+		
+		
 	}
 	
 	
@@ -94,9 +100,14 @@ public class Player {
 	/* The render method does all of the player rendering. */
 	public void render(Graphics g) {
 		
+		/* Rendering the player sprite: */
+		g.drawImage(sprite, (int) posX, (int) posY, null);
+		
+		
 		/* Rendering the player as a rectangle while we don't have sprites: */
+		/*
 		g.setColor(Color.GREEN);
-		g.drawRect((int) posX, (int) posY, width, height);
+		g.drawRect((int) posX, (int) posY, width, height); */
 		
 		
 	}

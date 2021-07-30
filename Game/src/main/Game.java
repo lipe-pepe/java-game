@@ -19,6 +19,7 @@ import java.awt.image.BufferedImage;
 import javax.swing.JFrame;
 
 import entities.Player;
+import graphics.Spritesheet;
 
 
 public class Game extends Canvas implements Runnable, KeyListener {
@@ -35,6 +36,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
 	public BufferedImage layer = new BufferedImage(FRAME_WIDTH, FRAME_HEIGHT, BufferedImage.TYPE_INT_RGB);
 	
 	// The game objects:
+	public static Spritesheet spritesheet;
 	public static Player player;
 
 	
@@ -47,7 +49,8 @@ public class Game extends Canvas implements Runnable, KeyListener {
 		this.setPreferredSize(new Dimension(FRAME_WIDTH*GAME_SCALE, FRAME_HEIGHT*GAME_SCALE));
 		this.addKeyListener(this);
 		
-		player = new Player(100, 50, 20, 8);
+		spritesheet = new Spritesheet("res/spritesheet.png");
+		player = new Player(100, 50, 20, 8, spritesheet.getSprite(0, 0, 32, 32));
 		
 	}
 	
