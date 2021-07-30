@@ -27,10 +27,11 @@ public class Game extends Canvas implements Runnable, KeyListener {
 	
 	
 	private static final long serialVersionUID = 1L;
-	public static int FRAME_WIDTH = 300;
-	public static int FRAME_HEIGHT = 300;
+
+	public static int GAME_SCALE = 2;
+	public static int FRAME_WIDTH = 1280/GAME_SCALE;
+	public static int FRAME_HEIGHT = 720/GAME_SCALE;
 	
-	public static int GAME_SCALE = 3;
 	
 	// We use an image as a layer to render the game.
 	public BufferedImage layer = new BufferedImage(FRAME_WIDTH, FRAME_HEIGHT, BufferedImage.TYPE_INT_RGB);
@@ -49,7 +50,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
 		this.setPreferredSize(new Dimension(FRAME_WIDTH*GAME_SCALE, FRAME_HEIGHT*GAME_SCALE));
 		this.addKeyListener(this);
 		
-		spritesheet = new Spritesheet("res/spritesheet.png");
+		spritesheet = new Spritesheet("/spritesheet.png");
 		player = new Player(100, 50, 20, 8, spritesheet.getSprite(0, 0, 32, 32));
 		
 	}
@@ -103,7 +104,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
 		}
 		
 		Graphics g = layer.getGraphics();
-		g.setColor(new Color(0,0,0));
+		g.setColor(new Color(192, 237, 239));
 		g.fillRect(0, 0, FRAME_WIDTH, FRAME_HEIGHT);
 		player.render(g);
 		
@@ -149,7 +150,6 @@ public class Game extends Canvas implements Runnable, KeyListener {
 		}
 		else if (e.getKeyCode() == KeyEvent.VK_DOWN || e.getKeyCode() == KeyEvent.VK_S) {
 			player.down = true;
-			System.out.println("Pressed down");
 		}
 		else if (e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_W) {
 			player.up = true;

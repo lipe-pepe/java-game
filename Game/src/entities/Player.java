@@ -73,7 +73,6 @@ public class Player {
 		}
 		else if (down) {
 			posY += verticalSpeed;
-			System.out.println("GOING DOWN, posY: " + posY);
 		}
 		
 		// Boundaries:
