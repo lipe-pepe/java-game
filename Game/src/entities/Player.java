@@ -23,8 +23,23 @@ public class Player {
 	
 	protected BufferedImage sprite;
 	
+	public static BufferedImage[] FLYING_SPRITE = {
+		Game.spritesheet.getSprite(0, 32, 32, 32),
+		Game.spritesheet.getSprite(32, 32, 32, 32),
+		Game.spritesheet.getSprite(64, 32, 32, 32),
+		Game.spritesheet.getSprite(96, 32, 32, 32),
+		Game.spritesheet.getSprite(128, 32, 32, 32),
+		Game.spritesheet.getSprite(160, 32, 32, 32)	
+	};
+	
+	// Animation variables:
+	private int currentFrame;
+	private int maxFrames = 2; // To change the animation speed, we must change the maxFrames.
+	private int currentSprite;
+	private int maxSprite = FLYING_SPRITE.length;
+	
 	public double horizontalSpeed = 1.5f;
-	public double verticalSpeed = 0.8f;
+	public double verticalSpeed = 1.2f;
 	
 	// Controller variables:
 	public boolean right;
@@ -89,6 +104,23 @@ public class Player {
 		else if (posY < 0) {
 			posY = 0;
 		}
+		
+		
+	// --- Animation: ---
+		
+		currentFrame++;
+		
+		if (currentFrame == maxFrames) {
+			currentFrame = 0;
+			currentSprite++;
+			
+			if (currentSprite == maxSprite) {
+				currentSprite = 0;
+			}
+		}
+		
+		sprite = FLYING_SPRITE[currentSprite];
+		
 		
 		
 	}
