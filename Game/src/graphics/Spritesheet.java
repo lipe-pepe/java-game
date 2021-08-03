@@ -26,11 +26,9 @@ public class Spritesheet {
 		try {
 			sheet = ImageIO.read(getClass().getResource(path));
 		} catch (IOException e) {
-			System.out.println("DEBUG 1");
 			e.printStackTrace();
 		}
 		
-		System.out.println("Sheet: " + sheet);
 	}
 	
 // --------------------------------------------------------------------------------------------------------------- //

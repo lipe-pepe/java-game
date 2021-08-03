@@ -18,6 +18,8 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JFrame;
 
+import entities.EnemyPlane;
+import entities.FriendBalloon;
 import entities.Player;
 import graphics.Spritesheet;
 
@@ -39,6 +41,8 @@ public class Game extends Canvas implements Runnable, KeyListener {
 	// The game objects:
 	public static Spritesheet spritesheet;
 	public static Player player;
+	public static EnemyPlane enemy;
+	public static FriendBalloon balloon;
 
 	
 // ----------------------------------------------------------------------------------------------------------------- //
@@ -51,7 +55,10 @@ public class Game extends Canvas implements Runnable, KeyListener {
 		this.addKeyListener(this);
 		
 		spritesheet = new Spritesheet("/spritesheet.png");
-		player = new Player(100, 50, 20, 8, spritesheet.getSprite(0, 0, 32, 32));
+		player = new Player(100, 50, 32, 32, spritesheet.getSprite(0, 0, 32, 32));
+		enemy = new EnemyPlane(300, 150, 32, 32, spritesheet.getSprite(0, 192, 32, 32));
+		balloon = new FriendBalloon(500, 100, 32, 64, spritesheet.getSprite(0, 96, 32, 64));
+		
 		
 	}
 	
@@ -87,6 +94,8 @@ public class Game extends Canvas implements Runnable, KeyListener {
 	public void tick() {
 		
 		player.tick();
+		enemy.tick();
+		balloon.tick();
 		
 	}
 	
@@ -107,6 +116,8 @@ public class Game extends Canvas implements Runnable, KeyListener {
 		g.setColor(new Color(192, 237, 239));
 		g.fillRect(0, 0, FRAME_WIDTH, FRAME_HEIGHT);
 		player.render(g);
+		enemy.render(g);
+		balloon.render(g);
 		
 		// We finally draw the graphics:
 		g = bs.getDrawGraphics();
@@ -154,6 +165,9 @@ public class Game extends Canvas implements Runnable, KeyListener {
 		else if (e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_W) {
 			player.up = true;
 		}
+		else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+			player.shoot = true;
+		}
 		
 	}
 
@@ -171,6 +185,9 @@ public class Game extends Canvas implements Runnable, KeyListener {
 		}
 		else if (e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_W) {
 			player.up = false;
+		}
+		else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+			player.shoot = false;
 		}
 	}
 		

@@ -6,22 +6,14 @@
 
 package entities;
 
-import java.awt.Color;
+//import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 import main.Game;
 
-public class Player {
+public class Player extends Entity{
 
-	
-	public double posX;
-	public double posY;
-	
-	public int width;
-	public int height;
-	
-	protected BufferedImage sprite;
 	
 	public static BufferedImage[] FLYING_SPRITE = {
 		Game.spritesheet.getSprite(0, 32, 32, 32),
@@ -41,11 +33,14 @@ public class Player {
 	public double horizontalSpeed = 1.5f;
 	public double verticalSpeed = 1.2f;
 	
-	// Controller variables:
+	// --- Controller variables: ---
+	
 	public boolean right;
 	public boolean left;
 	public boolean up;
 	public boolean down;
+	
+	public boolean shoot;
 	
 	
 	
@@ -55,14 +50,7 @@ public class Player {
 	/* The constructor of the player */
 	
 	public Player(double x, double y, int width, int height, BufferedImage sprite) {
-		
-		this.posX = x;
-		this.posY = y;
-		this.width = width;
-		this.height = height;
-		this.sprite = sprite;
-		
-		
+		super(x, y, width, height, sprite);
 	}
 	
 	
@@ -105,6 +93,10 @@ public class Player {
 			posY = 0;
 		}
 		
+		if (shoot) {
+			
+		}
+		
 		
 	// --- Animation: ---
 		
@@ -118,10 +110,7 @@ public class Player {
 				currentSprite = 0;
 			}
 		}
-		
-		sprite = FLYING_SPRITE[currentSprite];
-		
-		
+			
 		
 	}
 	
@@ -129,16 +118,12 @@ public class Player {
 // ----------------------------------------------------------------------------------------------------------- //
 	
 	/* The render method does all of the player rendering. */
+	
 	public void render(Graphics g) {
 		
-		/* Rendering the player sprite: */
-		g.drawImage(sprite, (int) posX, (int) posY, null);
+		sprite = FLYING_SPRITE[currentSprite];
 		
-		
-		/* Rendering the player as a rectangle while we don't have sprites: */
-		/*
-		g.setColor(Color.GREEN);
-		g.drawRect((int) posX, (int) posY, width, height); */
+		super.render(g);
 		
 		
 	}
