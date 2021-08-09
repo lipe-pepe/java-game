@@ -14,6 +14,7 @@ import main.Game;
 
 public class Player extends Entity{
 
+	// --- Sprites: ---
 	
 	public static BufferedImage[] FLYING_SPRITE = {
 		Game.spritesheet.getSprite(0, 32, 32, 32),
@@ -23,6 +24,12 @@ public class Player extends Entity{
 		Game.spritesheet.getSprite(128, 32, 32, 32),
 		Game.spritesheet.getSprite(160, 32, 32, 32)	
 	};
+	
+	
+	// --- Player Variables: ---
+	public int maxLives = 3;
+	public int lives;
+	
 	
 	// Animation variables:
 	private int currentFrame;
@@ -42,6 +49,13 @@ public class Player extends Entity{
 	
 	public boolean shoot;
 	
+	// --- Shooting variables: ---
+	
+	public int shootingPosX = 23;
+	public int shootingPosY = 28;
+	public int bulletSizeX = 3;
+	public int bulletSizeY = 3;
+	
 	
 	
 // --------------------------------------------------------------------------------------------------------- //
@@ -51,6 +65,8 @@ public class Player extends Entity{
 	
 	public Player(double x, double y, int width, int height, BufferedImage sprite) {
 		super(x, y, width, height, sprite);
+		
+		lives = maxLives;
 	}
 	
 	
@@ -92,9 +108,13 @@ public class Player extends Entity{
 		else if (posY < 0) {
 			posY = 0;
 		}
+
+		// Shooting: 
 		
 		if (shoot) {
-			
+			shoot = false;
+			Bullet bullet = new Bullet(this.getX() + this.shootingPosX, this.getY() + this.shootingPosY, bulletSizeX, bulletSizeY, null);
+			Game.bullets.add(bullet);
 		}
 		
 		
@@ -110,6 +130,9 @@ public class Player extends Entity{
 				currentSprite = 0;
 			}
 		}
+		
+		
+	// --- Life: ---
 			
 		
 	}

@@ -15,12 +15,15 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JFrame;
 
 import entities.EnemyPlane;
 import entities.FriendBalloon;
 import entities.Player;
+import entities.Bullet;
 import graphics.Spritesheet;
 
 
@@ -40,9 +43,12 @@ public class Game extends Canvas implements Runnable, KeyListener {
 	
 	// The game objects:
 	public static Spritesheet spritesheet;
+	public static UI ui;
 	public static Player player;
 	public static EnemyPlane enemy;
 	public static FriendBalloon balloon;
+	
+	public static List<Bullet> bullets;
 
 	
 // ----------------------------------------------------------------------------------------------------------------- //
@@ -58,6 +64,10 @@ public class Game extends Canvas implements Runnable, KeyListener {
 		player = new Player(100, 50, 32, 32, spritesheet.getSprite(0, 0, 32, 32));
 		enemy = new EnemyPlane(300, 150, 32, 32, spritesheet.getSprite(0, 192, 32, 32));
 		balloon = new FriendBalloon(500, 100, 32, 64, spritesheet.getSprite(0, 96, 32, 64));
+		
+		ui = new UI();
+		
+		bullets = new ArrayList<Bullet>();
 		
 		
 	}
@@ -97,6 +107,10 @@ public class Game extends Canvas implements Runnable, KeyListener {
 		enemy.tick();
 		balloon.tick();
 		
+		for(int i = 0; i < bullets.size(); i++) {
+			bullets.get(i).tick();
+		}
+		
 	}
 	
 	
@@ -119,9 +133,15 @@ public class Game extends Canvas implements Runnable, KeyListener {
 		enemy.render(g);
 		balloon.render(g);
 		
+		for(int i = 0; i < bullets.size(); i++) {
+			bullets.get(i).render(g);
+		}
+		
 		// We finally draw the graphics:
 		g = bs.getDrawGraphics();
 		g.drawImage(layer, 0, 0, FRAME_WIDTH*GAME_SCALE, FRAME_HEIGHT*GAME_SCALE, null);
+		
+		ui.render(g);
 		
 		bs.show();
 		
