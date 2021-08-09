@@ -26,6 +26,9 @@ public class Player extends Entity{
 	};
 	
 	
+	public static BufferedImage BULLET_SPRITE = Game.spritesheet.getSprite(45, 304, 6, 4);
+	
+	
 	// --- Player Variables: ---
 	public int maxLives = 3;
 	public int lives;
@@ -113,7 +116,7 @@ public class Player extends Entity{
 		
 		if (shoot) {
 			shoot = false;
-			Bullet bullet = new Bullet(this.getX() + this.shootingPosX, this.getY() + this.shootingPosY, bulletSizeX, bulletSizeY, null);
+			Bullet bullet = new Bullet(this.getX() + this.shootingPosX, this.getY() + this.shootingPosY, bulletSizeX, bulletSizeY, BULLET_SPRITE);
 			Game.bullets.add(bullet);
 		}
 		

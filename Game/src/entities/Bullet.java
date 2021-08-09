@@ -4,17 +4,13 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
+import main.Game;
+
 public class Bullet extends Entity {
 	
 	
 	public float speed = 4;
-	
-	
-	// --- Rendering: ---
-	
-	public Color bulletColor = Color.yellow;
 		
-	
 	
 // --------------------------------------------------------------------------------------------------------------- //	
 	
@@ -36,6 +32,10 @@ public class Bullet extends Entity {
 		// Moving right:
 		this.posX += speed;
 		
+		if (posX > Game.FRAME_WIDTH) {
+			Game.bullets.remove(this);
+		}
+		
 	}
 	
 	
@@ -45,8 +45,7 @@ public class Bullet extends Entity {
 	
 	public void render(Graphics g) {
 		
-		g.setColor(bulletColor);
-		g.fillRect((int) posX, (int) posY, width, height);	
+		super.render(g);
 		
 	}
 
