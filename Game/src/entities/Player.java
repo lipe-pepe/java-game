@@ -59,7 +59,7 @@ public class Player extends Entity{
 	public int bulletSizeX = 3;
 	public int bulletSizeY = 3;
 	
-	
+
 	
 // --------------------------------------------------------------------------------------------------------- //
 	
@@ -146,9 +146,11 @@ public class Player extends Entity{
 		for (Entity e : Game.allEntities) {
 			
 			if (e != this) {
+				
 				if (this.isCollidingWithEntity(e)) {
-					System.out.println("PLAYER COLIDIU COM OUTRA ENTIDADE");
-				}
+					e.die();
+					this.lives--;		
+				} 
 			}
 			
 		}

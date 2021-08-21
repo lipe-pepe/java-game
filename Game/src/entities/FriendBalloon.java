@@ -20,7 +20,11 @@ public class FriendBalloon extends Entity {
 	
 	public FriendBalloon(double x, double y, int width, int height, BufferedImage sprite) {
 		super(x, y, width, height, sprite);
-		// TODO Auto-generated constructor stub
+		
+		colX = 2;
+		colY = 11;
+		colWidth = 29;
+		colHeight = 44;
 	}
 	
 	

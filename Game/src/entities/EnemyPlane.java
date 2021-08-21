@@ -60,6 +60,12 @@ public class EnemyPlane extends Entity {
 			}
 		}
 		
+	// --- Dying: ---
+		
+		if (isAlive == false) {
+			this.posY += gravity;
+		}
+		
 	}
 	
 	

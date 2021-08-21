@@ -13,6 +13,8 @@ import java.awt.image.BufferedImage;
 
 public class Entity {
 	
+	public boolean isAlive;
+	
 	// The following variables are protected so that children can access them. 
 	protected double posX;
 	protected double posY;
@@ -28,6 +30,9 @@ public class Entity {
 	public int colWidth;
 	public int colHeight;
 	
+	// Physics variables:
+	public double gravity = 3.0f;
+	
 // ----------------------------------------------------------------------------------------------------------------- //
 	
 	/* The constructor method: */
@@ -38,6 +43,8 @@ public class Entity {
 		this.height = height;
 		this.width = width;
 		this.sprite = sprite;
+		
+		isAlive = true;
 			
 	}
 	
@@ -111,10 +118,10 @@ public class Entity {
 	public void render(Graphics g) {
 		
 		/* Debug of the collider: */
-		/*
+		
 		g.setColor(Color.red);
 		g.drawRect(getX() + colX, getY() + colY, colWidth, colHeight);
-		*/
+		
 		
 		/* Rendering the player sprite: */
 		g.drawImage(sprite, (int) posX, (int) posY, null);
@@ -126,6 +133,16 @@ public class Entity {
 		g.drawRect((int) posX, (int) posY, width, height); */
 		
 	}	
+
+	
+	// --------------------------------------------------------------------------------------------------------------------- //
+	
+		/* Every entity can die, so we will have a die method. */
+		
+		public void die() {
+
+			isAlive = false;
+		}
 	
 	
 }
