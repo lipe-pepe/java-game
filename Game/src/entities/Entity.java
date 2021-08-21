@@ -6,7 +6,9 @@
 
 package entities;
 
+import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 public class Entity {
@@ -19,6 +21,12 @@ public class Entity {
 	protected int height;
 	
 	BufferedImage sprite;
+	
+	// Collider variables:
+	public int colX;
+	public int colY;
+	public int colWidth;
+	public int colHeight;
 	
 // ----------------------------------------------------------------------------------------------------------------- //
 	
@@ -64,6 +72,33 @@ public class Entity {
 	}
 	
 	
+
+// --------------------------------------------------------------------------------------------------------------------- //
+	
+	
+	/* Collider method. Checks collisions between entities */
+	
+	public boolean isCollidingWithEntity(Entity e) {
+		
+		Rectangle thisColliderMask = new Rectangle(getX() + colX, getY() + colY, colWidth, colHeight);
+		Rectangle eColliderMask = new Rectangle(e.getX() + e.colX, e.getY() + e.colY, e.colWidth, e.colHeight);
+		
+		if (thisColliderMask.intersects(eColliderMask)) {
+			return true;
+		}
+		return false;
+	}
+	
+	
+	
+// -------------------------------------------------------------------------------------------------------------------- //	
+	
+	
+	public void tick() {
+		// TODO Auto-generated method stub
+		
+	}
+	
 	
 	
 	
@@ -75,6 +110,12 @@ public class Entity {
 	
 	public void render(Graphics g) {
 		
+		/* Debug of the collider: */
+		/*
+		g.setColor(Color.red);
+		g.drawRect(getX() + colX, getY() + colY, colWidth, colHeight);
+		*/
+		
 		/* Rendering the player sprite: */
 		g.drawImage(sprite, (int) posX, (int) posY, null);
 		
@@ -84,8 +125,7 @@ public class Entity {
 		g.setColor(Color.GREEN);
 		g.drawRect((int) posX, (int) posY, width, height); */
 		
-	}
-	
+	}	
 	
 	
 }

@@ -70,6 +70,11 @@ public class Player extends Entity{
 		super(x, y, width, height, sprite);
 		
 		lives = maxLives;
+		
+		colX = 1;
+		colY = 6;
+		colWidth = 31;
+		colHeight = 26;
 	}
 	
 	
@@ -136,7 +141,17 @@ public class Player extends Entity{
 		
 		
 	// --- Life: ---
+		
+		// Checking collision with other Entities:
+		for (Entity e : Game.allEntities) {
 			
+			if (e != this) {
+				if (this.isCollidingWithEntity(e)) {
+					System.out.println("PLAYER COLIDIU COM OUTRA ENTIDADE");
+				}
+			}
+			
+		}
 		
 	}
 	

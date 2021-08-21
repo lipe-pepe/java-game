@@ -21,6 +21,7 @@ import java.util.List;
 import javax.swing.JFrame;
 
 import entities.EnemyPlane;
+import entities.Entity;
 import entities.FriendBalloon;
 import entities.Player;
 import entities.Bullet;
@@ -48,6 +49,8 @@ public class Game extends Canvas implements Runnable, KeyListener {
 	public static EnemyPlane enemy;
 	public static FriendBalloon balloon;
 	
+	// We use a static list for the entities so that they can be acessed from other classes.
+	public static List<Entity> allEntities;
 	public static List<Bullet> bullets;
 
 	
@@ -59,11 +62,16 @@ public class Game extends Canvas implements Runnable, KeyListener {
 	public Game() {
 		this.setPreferredSize(new Dimension(FRAME_WIDTH*GAME_SCALE, FRAME_HEIGHT*GAME_SCALE));
 		this.addKeyListener(this);
+
+		allEntities = new ArrayList<Entity>();
 		
 		spritesheet = new Spritesheet("/spritesheet.png");
 		player = new Player(100, 50, 32, 32, spritesheet.getSprite(0, 0, 32, 32));
+		allEntities.add(player);
 		enemy = new EnemyPlane(300, 150, 32, 32, spritesheet.getSprite(0, 192, 32, 32));
+		allEntities.add(enemy);
 		balloon = new FriendBalloon(500, 100, 32, 64, spritesheet.getSprite(0, 96, 32, 64));
+		allEntities.add(balloon);
 		
 		ui = new UI();
 		
@@ -103,10 +111,14 @@ public class Game extends Canvas implements Runnable, KeyListener {
 	
 	public void tick() {
 		
+		for (Entity e : allEntities) {
+			e.tick();
+		}
+		/*
 		player.tick();
 		enemy.tick();
 		balloon.tick();
-		
+		*/
 		for(int i = 0; i < bullets.size(); i++) {
 			bullets.get(i).tick();
 		}
@@ -129,9 +141,14 @@ public class Game extends Canvas implements Runnable, KeyListener {
 		Graphics g = layer.getGraphics();
 		g.setColor(new Color(192, 237, 239));
 		g.fillRect(0, 0, FRAME_WIDTH, FRAME_HEIGHT);
-		player.render(g);
-		enemy.render(g);
-		balloon.render(g);
+		
+		// Rendering the entities:
+		
+		for (Entity e : allEntities) {
+			e.render(g);
+		}
+		
+		// Rendering the bullets:
 		
 		for(int i = 0; i < bullets.size(); i++) {
 			bullets.get(i).render(g);

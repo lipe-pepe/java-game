@@ -32,6 +32,11 @@ public class EnemyPlane extends Entity {
 	public EnemyPlane(double x, double y, int width, int height, BufferedImage sprite) {
 		super(x, y, width, height, sprite);
 		// TODO Auto-generated constructor stub
+		
+		colX = 1;
+		colY = 6;
+		colWidth = 31;
+		colHeight = 26;
 	}
 	
 	
