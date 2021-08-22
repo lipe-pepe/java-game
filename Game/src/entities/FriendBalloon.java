@@ -7,7 +7,7 @@ import main.Game;
 
 public class FriendBalloon extends Entity {
 
-	
+
 	public BufferedImage FLYING_SPRITE = Game.spritesheet.getSprite(0, 96, 32, 64);
 	
 	private double speed = 1;
@@ -25,6 +25,9 @@ public class FriendBalloon extends Entity {
 		colY = 11;
 		colWidth = 29;
 		colHeight = 44;
+		
+		maxLife = 3;
+		curLife = maxLife;
 	}
 	
 	
@@ -36,10 +39,17 @@ public class FriendBalloon extends Entity {
 	public void tick() {
 		
 		// Moving left:
-		this.posX -= speed;
+		this.posX -= speed;	
 		
-	}	
+		
+		// --- Checking life: ---
 	
+		if (curLife <= 0) {
+			die();
+		}
+	
+	}
+
 	
 	
 	

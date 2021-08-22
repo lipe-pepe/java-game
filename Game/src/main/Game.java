@@ -38,6 +38,9 @@ public class Game extends Canvas implements Runnable, KeyListener {
 	public static int FRAME_WIDTH = 1280/GAME_SCALE;
 	public static int FRAME_HEIGHT = 720/GAME_SCALE;
 	
+	// We'll use a debug variable as developers to show game.
+	public static boolean debugVar = false;
+	
 	
 	// We use an image as a layer to render the game.
 	public BufferedImage layer = new BufferedImage(FRAME_WIDTH, FRAME_HEIGHT, BufferedImage.TYPE_INT_RGB);
@@ -66,10 +69,13 @@ public class Game extends Canvas implements Runnable, KeyListener {
 		allEntities = new ArrayList<Entity>();
 		
 		spritesheet = new Spritesheet("/spritesheet.png");
+		
 		player = new Player(100, 50, 32, 32, spritesheet.getSprite(0, 0, 32, 32));
 		allEntities.add(player);
+		
 		enemy = new EnemyPlane(300, 150, 32, 32, spritesheet.getSprite(0, 192, 32, 32));
 		allEntities.add(enemy);
+		
 		balloon = new FriendBalloon(500, 100, 32, 64, spritesheet.getSprite(0, 96, 32, 64));
 		allEntities.add(balloon);
 		
@@ -204,6 +210,13 @@ public class Game extends Canvas implements Runnable, KeyListener {
 		}
 		else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
 			player.shoot = true;
+		}
+		
+		
+		/* A developers debug key will be pressed to show some stuff:
+		 This must be comented in the final product of the game: */
+		if (e.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
+			debugVar = !debugVar;
 		}
 		
 	}

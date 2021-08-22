@@ -1,5 +1,7 @@
 package entities;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
@@ -17,7 +19,18 @@ public class EnemyPlane extends Entity {
 		Game.spritesheet.getSprite(160, 224, 32, 32)	
 	};
 	
-	// Animation variables:
+	
+	// --- Life variables:
+	
+	private static Color lifeBarColor = Color.GREEN;
+	private static Color lifeBarBehind = Color.RED;
+	
+	private static int lifeBarPosX;
+	private static int lifeBarPosY = -5;
+	private static int lifeBarWidth = 20;
+	private static int lifeBarHeight = 2;
+	
+	// --- Animation variables:
 	private int currentFrame;
 	private int maxFrames = 2; // To change the animation speed, we must change the maxFrames.
 	private int currentSprite;
@@ -33,10 +46,16 @@ public class EnemyPlane extends Entity {
 		super(x, y, width, height, sprite);
 		// TODO Auto-generated constructor stub
 		
+		maxLife = 10;
+		curLife = maxLife;
+		
 		colX = 1;
 		colY = 6;
 		colWidth = 31;
 		colHeight = 26;
+		
+		// Centralizing the life bar:
+		lifeBarPosX = (getWidth() - lifeBarWidth) / 2;
 	}
 	
 	
@@ -60,10 +79,10 @@ public class EnemyPlane extends Entity {
 			}
 		}
 		
-	// --- Dying: ---
+	// --- Checking life: ---
 		
-		if (isAlive == false) {
-			this.posY += gravity;
+		if (curLife <= 0) {
+			die();
 		}
 		
 	}
@@ -77,8 +96,20 @@ public class EnemyPlane extends Entity {
 		
 		sprite = FLYING_SPRITE[currentSprite];
 		
+		// Rendering the life bar:
+		
+		if (curLife > 0) {
+
+			g.setColor(lifeBarBehind);
+			g.fillRect(this.getX() + lifeBarPosX, this.getY() + lifeBarPosY, lifeBarWidth, lifeBarHeight);
+			
+			g.setColor(lifeBarColor);
+			g.fillRect(this.getX() + lifeBarPosX, this.getY() + lifeBarPosY, (int) (lifeBarWidth * (curLife / maxLife)), lifeBarHeight);
+		}
+		
 		super.render(g);	
 		
 	}
+	
 
 }

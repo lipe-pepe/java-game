@@ -7,9 +7,12 @@
 package entities;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+
+import main.Game;
 
 public class Entity {
 	
@@ -23,6 +26,10 @@ public class Entity {
 	protected int height;
 	
 	BufferedImage sprite;
+	
+	// Life variables
+	protected double curLife;
+	protected double maxLife;	
 	
 	// Collider variables:
 	public int colX;
@@ -117,11 +124,17 @@ public class Entity {
 	
 	public void render(Graphics g) {
 		
-		/* Debug of the collider: */
+		/* Debug of the collider and life: */
+		if (Game.debugVar == true) {
+			g.setColor(Color.red);
+			g.drawRect(getX() + colX, getY() + colY, colWidth, colHeight);
+			
+			
+			g.setColor(Color.black);
+			g.setFont(new Font("arial", Font.BOLD, 12));
+			g.drawString((int) ((curLife / maxLife) * 100) + "%", getX(), getY());
 		
-		g.setColor(Color.red);
-		g.drawRect(getX() + colX, getY() + colY, colWidth, colHeight);
-		
+		}
 		
 		/* Rendering the player sprite: */
 		g.drawImage(sprite, (int) posX, (int) posY, null);
@@ -133,16 +146,45 @@ public class Entity {
 		g.drawRect((int) posX, (int) posY, width, height); */
 		
 	}	
-
 	
-	// --------------------------------------------------------------------------------------------------------------------- //
 	
-		/* Every entity can die, so we will have a die method. */
+	
+	
+// --------------------------------------------------------------------------------------------------------------------- //
+	
+	
+	/* Every entity can be destroyed, that means being taken out of the game. */
+	
+	public void destroyObject() {
 		
-		public void die() {
+		Game.allEntities.remove(this);
+		
+		Game.bullets.remove(this);
+	}
 
-			isAlive = false;
+	
+// --------------------------------------------------------------------------------------------------------------------- //
+	
+	/* Every entity can die, so we will have a die method. */
+		
+	public void die() {
+	
+		this.posY += gravity;			
+		
+	}
+		
+		
+// ----------------------------------------------------------------------------------------------------------------------- //
+	
+		/* Although it will be different for each entity, all entities can take damage, so we'll have a method for
+		 * it. The main reason is that we can acess it from the class entity.	 */
+	
+		public void takeDamage(double damage) {
+			
+			curLife -= damage;
+			
+			if (curLife <= 0) {
+				curLife = 0;
+			}
 		}
-	
-	
 }

@@ -148,7 +148,7 @@ public class Player extends Entity{
 			if (e != this) {
 				
 				if (this.isCollidingWithEntity(e)) {
-					e.die();
+					e.curLife = 0;
 					this.lives--;		
 				} 
 			}
