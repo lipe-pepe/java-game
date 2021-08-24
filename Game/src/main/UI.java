@@ -17,6 +17,12 @@ public class UI {
 	public int heartsSpacing = 20;
 	
 	
+	// --- Score UI: ---
+	
+	public Color scoreColor = new Color(49, 34, 44);
+	public int scorePosX = Game.FRAME_WIDTH/2 + 200;
+	public int scorePosY = 30;
+	
 // ---------------------------------------------------------------------------------------------------------------- //
 	
 	/* The render method will show all of the game UI.*/
@@ -32,6 +38,13 @@ public class UI {
 			g.drawImage(heartIcon, heartsPosX + (i*heartsSpacing*UI_SCALE), heartsPosY, 16*UI_SCALE, 16*UI_SCALE, null);
 		}
 		
+		
+		// Showing the score:
+		g.setColor(scoreColor);
+		g.setFont(Game.gameFont.deriveFont(20f));
+		g.drawString(" - SCORE - ", scorePosX, scorePosY);
+		g.setFont(Game.gameFont.deriveFont(35f));
+		g.drawString("0000000", scorePosX - 30, scorePosY + 35);
 		
 	}
 	

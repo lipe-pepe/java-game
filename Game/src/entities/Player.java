@@ -1,4 +1,4 @@
-/* --- NEW JAVA GAME ---	
+/* --- Flying Kittens ---	
  * 
  * Author: Felipe Pêpe da Silva Oliveira
  * Date: 29/07/2021

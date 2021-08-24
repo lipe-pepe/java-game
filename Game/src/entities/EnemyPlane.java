@@ -1,3 +1,10 @@
+/* --- Flying Kittens ---	
+ * 
+ * Author: Felipe Pêpe da Silva Oliveira
+ * Date: 29/07/2021
+ */
+
+
 package entities;
 
 import java.awt.Color;

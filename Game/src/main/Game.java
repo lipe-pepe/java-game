@@ -1,4 +1,4 @@
-/* --- NEW JAVA GAME ---	
+/* --- Flying Kittens ---	
  * 
  * Author: Felipe Pêpe da Silva Oliveira
  * Date: 29/07/2021
@@ -10,11 +10,15 @@ package main;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,6 +59,10 @@ public class Game extends Canvas implements Runnable, KeyListener {
 	// We use a static list for the entities so that they can be acessed from other classes.
 	public static List<Entity> allEntities;
 	public static List<Bullet> bullets;
+	
+	// Game fonts:
+	public InputStream stream = ClassLoader.getSystemClassLoader().getResourceAsStream("Early GameBoy.ttf");
+	public static Font gameFont;
 
 	
 // ----------------------------------------------------------------------------------------------------------------- //
@@ -82,6 +90,16 @@ public class Game extends Canvas implements Runnable, KeyListener {
 		ui = new UI();
 		
 		bullets = new ArrayList<Bullet>();
+		
+		// --- Fonts: ---
+		
+		try {
+			gameFont = Font.createFont(Font.TRUETYPE_FONT, stream).deriveFont(50f);
+		} catch (FontFormatException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} 
 		
 		
 	}
