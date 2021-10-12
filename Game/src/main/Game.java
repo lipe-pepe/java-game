@@ -63,6 +63,10 @@ public class Game extends Canvas implements Runnable, KeyListener {
 	// Game fonts:
 	public InputStream stream = ClassLoader.getSystemClassLoader().getResourceAsStream("Early GameBoy.ttf");
 	public static Font gameFont;
+	
+	// The score:
+	public static int score;
+	public static int bulletsAmount;
 
 	
 // ----------------------------------------------------------------------------------------------------------------- //
@@ -100,6 +104,11 @@ public class Game extends Canvas implements Runnable, KeyListener {
 		} catch (IOException e) {
 			e.printStackTrace();
 		} 
+		
+		// --- Game variables: ---
+		
+		score = 0;
+		bulletsAmount = 0;
 		
 		
 	}

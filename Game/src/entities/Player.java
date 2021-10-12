@@ -8,6 +8,7 @@ package entities;
 
 //import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
 import main.Game;
@@ -165,6 +166,9 @@ public class Player extends Entity{
 	public void render(Graphics g) {
 		
 		sprite = FLYING_SPRITE[currentSprite];
+		
+		//Graphics2D g2 = (Graphics2D) g;
+		//g2.rotate(Math.toRadians(15), this.posX , this.posY);
 		
 		super.render(g);
 		

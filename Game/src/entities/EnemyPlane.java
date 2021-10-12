@@ -43,6 +43,10 @@ public class EnemyPlane extends Entity {
 	private int currentSprite;
 	private int maxSprite = FLYING_SPRITE.length;
 	
+	// --- Score variables:
+	
+	private int scorePoints = 100;
+	
 	
 // -------------------------------------------------------------------------------------------------------------- //	
 	
@@ -90,6 +94,7 @@ public class EnemyPlane extends Entity {
 		
 		if (curLife <= 0) {
 			die();
+			Game.score += scorePoints;
 		}
 		
 	}
