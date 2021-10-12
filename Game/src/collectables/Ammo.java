@@ -7,7 +7,7 @@ import main.Game;
 
 public class Ammo extends Collectable {
 	
-	public BufferedImage SPRITE = Game.spritesheet.getSprite(96, 288, 32, 32);
+	public BufferedImage SPRITE = Game.spritesheet.getSprite(32, 480, 32, 32);
 	
 	
 // --------------------------------------------------------------------------------------------------------------------- //

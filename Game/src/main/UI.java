@@ -10,7 +10,7 @@ public class UI {
 	
 	// --- Life UI: ---
 	
-	public BufferedImage heartIcon = Game.spritesheet.getSprite(8, 296, 16, 16);
+	public BufferedImage heartIcon = Game.spritesheet.getSprite(40, 649, 16, 16);
 	
 	public int heartsPosX = 20;
 	public int heartsPosY = 20;
@@ -18,7 +18,7 @@ public class UI {
 	
 	// --- Bullets UI: ---
 	
-	public BufferedImage bulletIcon = Game.spritesheet.getSprite(70, 296, 20, 20);
+	public BufferedImage bulletIcon = Game.spritesheet.getSprite(102, 648, 20, 20);
 	
 	public int bulletsPosX = 20;
 	public int bulletsPosY = 20;

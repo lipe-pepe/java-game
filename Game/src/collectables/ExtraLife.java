@@ -7,7 +7,7 @@ import main.Game;
 
 public class ExtraLife extends Collectable {
 
-	public BufferedImage SPRITE = Game.spritesheet.getSprite(128, 288, 32, 32);
+	public BufferedImage SPRITE = Game.spritesheet.getSprite(64, 480, 32, 32);
 	
 	
 // --------------------------------------------------------------------------------------------------------------------- //

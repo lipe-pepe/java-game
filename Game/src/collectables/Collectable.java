@@ -31,12 +31,12 @@ public class Collectable {
 	// Collecting :
 	
 	protected BufferedImage[] COLLECT_SPRITE = {
-		Game.spritesheet.getSprite(192, 288, 32, 32),
-		Game.spritesheet.getSprite(224, 288, 32, 32),
-		Game.spritesheet.getSprite(256, 288, 32, 32),
-		Game.spritesheet.getSprite(288, 288, 32, 32),
-		Game.spritesheet.getSprite(320, 288, 32, 32),
-		Game.spritesheet.getSprite(352, 288, 32, 32)			
+		Game.spritesheet.getSprite(224, 480, 32, 32),
+		Game.spritesheet.getSprite(256, 480, 32, 32),
+		Game.spritesheet.getSprite(288, 480, 32, 32),
+		Game.spritesheet.getSprite(320, 480, 32, 32),
+		Game.spritesheet.getSprite(352, 480, 32, 32),
+		Game.spritesheet.getSprite(384, 480, 32, 32)		
 	};
 	
 	private int currentFrame;

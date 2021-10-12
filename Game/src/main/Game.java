@@ -52,6 +52,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
 	public static Player player;
 	public static EnemyPlane enemy;
 	public static FriendBalloon balloon;
+	public static EnemyBalloon enemyBalloon;
 	public static ExtraLife extraLife;
 	public static Ammo ammoItem;
 	
@@ -93,13 +94,16 @@ public class Game extends Canvas implements Runnable, KeyListener {
 		balloon = new FriendBalloon(500, 100, 32, 64, spritesheet.getSprite(0, 96, 32, 64));
 		allEntities.add(balloon);
 		
+		enemyBalloon = new EnemyBalloon(800, 50, 32, 64, spritesheet.getSprite(0, 96, 32, 64));
+		allEntities.add(enemyBalloon);
+		
 		ui = new UI();
 		
-		extraLife = new ExtraLife(600, 100, 32, 32, spritesheet.getSprite(128, 288, 32, 32));
+		extraLife = new ExtraLife(600, 100, 32, 32, spritesheet.getSprite(64, 480, 32, 32));
 		collectables.add(extraLife);
 		
 		
-		ammoItem = new Ammo(500, 200, 32, 32, spritesheet.getSprite(96, 288, 32, 32));
+		ammoItem = new Ammo(500, 200, 32, 32, spritesheet.getSprite(32, 480, 32, 32));
 		collectables.add(ammoItem);
 		
 		bullets = new ArrayList<Bullet>();

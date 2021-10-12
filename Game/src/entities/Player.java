@@ -19,16 +19,16 @@ public class Player extends Entity{
 	// --- Sprites: ---
 	
 	public static BufferedImage[] FLYING_SPRITE = {
-		Game.spritesheet.getSprite(0, 32, 32, 32),
-		Game.spritesheet.getSprite(32, 32, 32, 32),
-		Game.spritesheet.getSprite(64, 32, 32, 32),
-		Game.spritesheet.getSprite(96, 32, 32, 32),
-		Game.spritesheet.getSprite(128, 32, 32, 32),
-		Game.spritesheet.getSprite(160, 32, 32, 32)	
+		Game.spritesheet.getSprite(32, 64, 32, 32),
+		Game.spritesheet.getSprite(64, 64, 32, 32),
+		Game.spritesheet.getSprite(96, 64, 32, 32),
+		Game.spritesheet.getSprite(128, 64, 32, 32),
+		Game.spritesheet.getSprite(160, 64, 32, 32),
+		Game.spritesheet.getSprite(192, 64, 32, 32)
 	};
 	
 	
-	public static BufferedImage BULLET_SPRITE = Game.spritesheet.getSprite(45, 304, 6, 4);
+	public static BufferedImage BULLET_SPRITE = Game.spritesheet.getSprite(77, 656, 6, 4);
 	
 	
 	// --- Player Variables: ---
@@ -155,8 +155,12 @@ public class Player extends Entity{
 			if (e != this) {
 				
 				if (this.isCollidingWithEntity(e)) {
+					if (e.isAlive) {
+						this.lives--;
+					}
 					e.curLife = 0;
-					this.lives--;		
+					e.die();
+							
 				} 
 			}
 			

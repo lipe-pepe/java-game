@@ -18,12 +18,12 @@ public class EnemyPlane extends Entity {
 
 	
 	public static BufferedImage[] FLYING_SPRITE = {
-		Game.spritesheet.getSprite(0, 224, 32, 32),
-		Game.spritesheet.getSprite(32, 224, 32, 32),
-		Game.spritesheet.getSprite(64, 224, 32, 32),
-		Game.spritesheet.getSprite(96, 224, 32, 32),
-		Game.spritesheet.getSprite(128, 224, 32, 32),
-		Game.spritesheet.getSprite(160, 224, 32, 32)	
+		Game.spritesheet.getSprite(32, 192, 32, 32),
+		Game.spritesheet.getSprite(64, 192, 32, 32),
+		Game.spritesheet.getSprite(96, 192, 32, 32),
+		Game.spritesheet.getSprite(128, 192, 32, 32),
+		Game.spritesheet.getSprite(160, 192, 32, 32),
+		Game.spritesheet.getSprite(192, 192, 32, 32)	
 	};
 	
 	
