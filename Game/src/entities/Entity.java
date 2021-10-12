@@ -192,6 +192,8 @@ public class Entity {
 	/* Every entity can die, so we will have a die method. */
 		
 	public void die() {
+		
+		isAlive = false;
 	
 		this.posY += gravity;			
 		

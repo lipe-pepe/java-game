@@ -17,10 +17,10 @@ public class Ammo extends Collectable {
 	public Ammo(double x, double y, int width, int height, BufferedImage sprite) {
 		super(x, y, width, height, sprite);
 		
-		colX = 2;
-		colY = 11;
-		colWidth = 29;
-		colHeight = 44;
+		colX = 5;
+		colY = 6;
+		colWidth = 22;
+		colHeight = 22;
 		
 		sprite = SPRITE;
 	}
@@ -42,6 +42,7 @@ public class Ammo extends Collectable {
 	}
 	
 	
+	
 // ---------------------------------------------------------------------------------------------------------------- //
 
 	/* The render method does all of the rendering. */
@@ -49,6 +50,20 @@ public class Ammo extends Collectable {
 	public void render(Graphics g) {
 		
 		super.render(g);	
+		
+	}
+	
+
+// ---------------------------------------------------------------------------------------------------------------- //
+
+	
+	public void collect() {
+		
+		if (this.collected == false)
+			Game.ammo += 10;
+		
+		
+		super.collect();;	
 		
 	}
 	

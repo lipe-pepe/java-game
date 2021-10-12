@@ -53,7 +53,6 @@ public class Game extends Canvas implements Runnable, KeyListener {
 	public static EnemyPlane enemy;
 	public static FriendBalloon balloon;
 	public static ExtraLife extraLife;
-	public static ExtraLife extraLife2;
 	public static Ammo ammoItem;
 	
 	// We use a static list for the entities so that they can be acessed from other classes.
@@ -99,12 +98,9 @@ public class Game extends Canvas implements Runnable, KeyListener {
 		extraLife = new ExtraLife(600, 100, 32, 32, spritesheet.getSprite(128, 288, 32, 32));
 		collectables.add(extraLife);
 		
-		extraLife2 = new ExtraLife(800, 300, 32, 32, spritesheet.getSprite(128, 288, 32, 32));
 		
-		
-		ammoItem = new Ammo(700, 200, 32, 32, spritesheet.getSprite(96, 288, 32, 32));
+		ammoItem = new Ammo(500, 200, 32, 32, spritesheet.getSprite(96, 288, 32, 32));
 		collectables.add(ammoItem);
-		collectables.add(extraLife2);
 		
 		bullets = new ArrayList<Bullet>();
 		
@@ -157,13 +153,14 @@ public class Game extends Canvas implements Runnable, KeyListener {
 	
 	public void tick() {
 		
-		for(Collectable c : collectables) {
-			c.tick();
+		for(int i = 0; i < collectables.size(); i++) {
+			collectables.get(i).tick();
 		}
 		
-		for (Entity e : allEntities) {
-			e.tick();
+		for(int i = 0; i < allEntities.size(); i++) {
+			allEntities.get(i).tick();
 		}
+		
 		/*
 		player.tick();
 		enemy.tick();

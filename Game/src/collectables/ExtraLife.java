@@ -17,10 +17,10 @@ public class ExtraLife extends Collectable {
 	public ExtraLife(double x, double y, int width, int height, BufferedImage sprite) {
 		super(x, y, width, height, sprite);
 		
-		colX = 2;
-		colY = 11;
-		colWidth = 29;
-		colHeight = 44;
+		colX = 5;
+		colY = 6;
+		colWidth = 22;
+		colHeight = 22;
 		
 		sprite = SPRITE;
 	}
@@ -49,6 +49,20 @@ public class ExtraLife extends Collectable {
 	public void render(Graphics g) {
 		
 		super.render(g);	
+		
+	}
+
+	
+// ---------------------------------------------------------------------------------------------------------------- //
+
+
+	public void collect() {
+		
+		if (this.collected == false)
+			Game.player.lives++;
+		
+		
+		super.collect();;	
 		
 	}
 	

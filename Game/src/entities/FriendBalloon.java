@@ -19,6 +19,10 @@ public class FriendBalloon extends Entity {
 	
 	private double speed = 1;
 	
+	// --- Score variables:
+	
+	private int scorePoints = -50;
+	
 	
 // -------------------------------------------------------------------------------------------------------------- //	
 	
@@ -74,6 +78,19 @@ public class FriendBalloon extends Entity {
 		
 		super.render(g);	
 		
+	}
+	
+	
+// ----------------------------------------------------------------------------------------------------------- //
+
+
+	public void die() {
+		
+		if (isAlive == true) {
+			Game.score += this.scorePoints;
+		}
+		
+		super.die();
 	}
 
 }

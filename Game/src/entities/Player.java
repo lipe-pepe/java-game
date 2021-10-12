@@ -123,8 +123,13 @@ public class Player extends Entity{
 		
 		if (shoot) {
 			shoot = false;
-			Bullet bullet = new Bullet(this.getX() + this.shootingPosX, this.getY() + this.shootingPosY, bulletSizeX, bulletSizeY, BULLET_SPRITE);
-			Game.bullets.add(bullet);
+			// We can only shoot if we have ammo:
+			if (Game.ammo > 0) {
+				Bullet bullet = new Bullet(this.getX() + this.shootingPosX, this.getY() + this.shootingPosY, bulletSizeX, bulletSizeY, BULLET_SPRITE);
+				Game.bullets.add(bullet);
+				Game.ammo--;
+			}
+			
 		}
 		
 		

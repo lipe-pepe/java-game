@@ -94,7 +94,6 @@ public class EnemyPlane extends Entity {
 		
 		if (curLife <= 0) {
 			die();
-			Game.score += scorePoints;
 		}
 		
 	super.tick();
@@ -123,6 +122,19 @@ public class EnemyPlane extends Entity {
 		
 		super.render(g);	
 		
+	}
+	
+	
+// ----------------------------------------------------------------------------------------------------------- //
+	
+	
+	public void die() {
+		
+		if (isAlive == true) {
+			Game.score += this.scorePoints;
+		}
+		
+		super.die();
 	}
 	
 

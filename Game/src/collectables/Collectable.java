@@ -40,11 +40,11 @@ public class Collectable {
 	};
 	
 	private int currentFrame;
-	private int maxFrames = 2; // To change the animation speed, we must change the maxFrames.
+	private int maxFrames = 1; // To change the animation speed, we must change the maxFrames.
 	private int currentSprite;
 	private int maxSprite = COLLECT_SPRITE.length;
 	
-	private boolean collected = false;
+	protected boolean collected = false;
 
 	
 // ----------------------------------------------------------------------------------------------------------------- //
