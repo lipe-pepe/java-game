@@ -97,6 +97,8 @@ public class EnemyPlane extends Entity {
 			Game.score += scorePoints;
 		}
 		
+	super.tick();
+		
 	}
 	
 	

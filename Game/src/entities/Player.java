@@ -11,6 +11,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
+import collectables.Collectable;
 import main.Game;
 
 public class Player extends Entity{
@@ -156,6 +157,14 @@ public class Player extends Entity{
 			
 		}
 		
+	// --- Collectables: ---
+		
+		// Checking collision with other Collectables:
+		for (Collectable c : Game.collectables) {
+			if (this.isCollidingWithCollectable(c)) {
+				c.collect();
+			}
+		}
 	}
 	
 	

@@ -24,11 +24,8 @@ import java.util.List;
 
 import javax.swing.JFrame;
 
-import entities.EnemyPlane;
-import entities.Entity;
-import entities.FriendBalloon;
-import entities.Player;
-import entities.Bullet;
+import collectables.*;
+import entities.*;
 import graphics.Spritesheet;
 
 
@@ -55,10 +52,14 @@ public class Game extends Canvas implements Runnable, KeyListener {
 	public static Player player;
 	public static EnemyPlane enemy;
 	public static FriendBalloon balloon;
+	public static ExtraLife extraLife;
+	public static ExtraLife extraLife2;
+	public static Ammo ammoItem;
 	
 	// We use a static list for the entities so that they can be acessed from other classes.
 	public static List<Entity> allEntities;
 	public static List<Bullet> bullets;
+	public static List<Collectable> collectables;
 	
 	// Game fonts:
 	public InputStream stream = ClassLoader.getSystemClassLoader().getResourceAsStream("Early GameBoy.ttf");
@@ -66,7 +67,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
 	
 	// The score:
 	public static int score;
-	public static int bulletsAmount;
+	public static int ammo;
 
 	
 // ----------------------------------------------------------------------------------------------------------------- //
@@ -80,6 +81,8 @@ public class Game extends Canvas implements Runnable, KeyListener {
 
 		allEntities = new ArrayList<Entity>();
 		
+		collectables = new ArrayList<Collectable>();
+		
 		spritesheet = new Spritesheet("/spritesheet.png");
 		
 		player = new Player(100, 50, 32, 32, spritesheet.getSprite(0, 0, 32, 32));
@@ -92,6 +95,16 @@ public class Game extends Canvas implements Runnable, KeyListener {
 		allEntities.add(balloon);
 		
 		ui = new UI();
+		
+		extraLife = new ExtraLife(600, 100, 32, 32, spritesheet.getSprite(128, 288, 32, 32));
+		collectables.add(extraLife);
+		
+		extraLife2 = new ExtraLife(800, 300, 32, 32, spritesheet.getSprite(128, 288, 32, 32));
+		
+		
+		ammoItem = new Ammo(700, 200, 32, 32, spritesheet.getSprite(96, 288, 32, 32));
+		collectables.add(ammoItem);
+		collectables.add(extraLife2);
 		
 		bullets = new ArrayList<Bullet>();
 		
@@ -108,7 +121,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
 		// --- Game variables: ---
 		
 		score = 0;
-		bulletsAmount = 0;
+		ammo = 0;
 		
 		
 	}
@@ -144,6 +157,10 @@ public class Game extends Canvas implements Runnable, KeyListener {
 	
 	public void tick() {
 		
+		for(Collectable c : collectables) {
+			c.tick();
+		}
+		
 		for (Entity e : allEntities) {
 			e.tick();
 		}
@@ -155,6 +172,9 @@ public class Game extends Canvas implements Runnable, KeyListener {
 		for(int i = 0; i < bullets.size(); i++) {
 			bullets.get(i).tick();
 		}
+		
+		
+		
 		
 	}
 	
@@ -175,6 +195,14 @@ public class Game extends Canvas implements Runnable, KeyListener {
 		g.setColor(new Color(192, 237, 239));
 		g.fillRect(0, 0, FRAME_WIDTH, FRAME_HEIGHT);
 		
+		
+		// Rendering the collectables:
+		
+		for(Collectable c : collectables) {
+			c.render(g);
+		}
+		
+		
 		// Rendering the entities:
 		
 		for (Entity e : allEntities) {
@@ -186,6 +214,8 @@ public class Game extends Canvas implements Runnable, KeyListener {
 		for(int i = 0; i < bullets.size(); i++) {
 			bullets.get(i).render(g);
 		}
+		
+		
 		
 		// We finally draw the graphics:
 		g = bs.getDrawGraphics();

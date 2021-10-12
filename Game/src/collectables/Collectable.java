@@ -1,10 +1,4 @@
-/* --- Flying Kittens ---	
- * 
- * Author: Felipe Pêpe da Silva Oliveira
- * Date: 29/07/2021
- */
-
-package entities;
+package collectables;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -12,12 +6,10 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
-import collectables.Collectable;
+import entities.Entity;
 import main.Game;
 
-public class Entity {
-	
-	public boolean isAlive;
+public class Collectable {
 	
 	// The following variables are protected so that children can access them. 
 	protected double posX;
@@ -28,9 +20,7 @@ public class Entity {
 	
 	BufferedImage sprite;
 	
-	// Life variables
-	protected double curLife;
-	protected double maxLife;	
+	protected double speed = 1;
 	
 	// Collider variables:
 	public int colX;
@@ -38,21 +28,39 @@ public class Entity {
 	public int colWidth;
 	public int colHeight;
 	
-	// Physics variables:
-	public double gravity = 3.0f;
+	// Collecting :
+	
+	protected BufferedImage[] COLLECT_SPRITE = {
+		Game.spritesheet.getSprite(192, 288, 32, 32),
+		Game.spritesheet.getSprite(224, 288, 32, 32),
+		Game.spritesheet.getSprite(256, 288, 32, 32),
+		Game.spritesheet.getSprite(288, 288, 32, 32),
+		Game.spritesheet.getSprite(320, 288, 32, 32),
+		Game.spritesheet.getSprite(352, 288, 32, 32)			
+	};
+	
+	private int currentFrame;
+	private int maxFrames = 2; // To change the animation speed, we must change the maxFrames.
+	private int currentSprite;
+	private int maxSprite = COLLECT_SPRITE.length;
+	
+	private boolean collected = false;
+
 	
 // ----------------------------------------------------------------------------------------------------------------- //
 	
 	/* The constructor method: */
 	
-	public Entity(double x, double y, int width, int height, BufferedImage sprite) {
+	public Collectable(double x, double y, int width, int height, BufferedImage sprite) {
 		this.posX = x;
 		this.posY = y;
 		this.height = height;
 		this.width = width;
 		this.sprite = sprite;
 		
-		isAlive = true;
+		currentFrame = 0;
+		currentSprite = 0;
+		
 			
 	}
 	
@@ -105,32 +113,30 @@ public class Entity {
 	}
 	
 	
-// --------------------------------------------------------------------------------------------------------------------- //
-	
-	
-		/* Collider method. Checks collisions with a collectable */
-		
-		public boolean isCollidingWithCollectable(Collectable c) {
-			
-			Rectangle thisColliderMask = new Rectangle(getX() + colX, getY() + colY, colWidth, colHeight);
-			Rectangle cColliderMask = new Rectangle(c.getX() + c.colX, c.getY() + c.colY, c.colWidth, c.colHeight);
-			
-			if (thisColliderMask.intersects(cColliderMask)) {
-				return true;
-			}
-			return false;
-		}
-	
-	
 	
 // -------------------------------------------------------------------------------------------------------------------- //	
 	
 	
 	public void tick() {
 		// TODO Auto-generated method stub
-		
-		if (posY > Game.FRAME_HEIGHT * Game.GAME_SCALE * 2) {
-			destroyObject();
+		if (collected == true) {
+			
+			// --- Collect Animation: ---
+			
+			currentFrame++;
+			
+			if (currentFrame == maxFrames) {
+				currentFrame = 0;
+				currentSprite++;
+				
+				if (currentSprite == maxSprite) {
+					currentSprite = 0;
+					// Since this animation has no loop, we just want to destroy the object after it finishes:
+					destroyObject();
+				}
+			}
+			
+			sprite = COLLECT_SPRITE[currentSprite];
 		}
 		
 	}
@@ -146,26 +152,16 @@ public class Entity {
 	
 	public void render(Graphics g) {
 		
-		/* Debug of the collider and life: */
+		/* Debug of the collider: */
 		if (Game.debugVar == true) {
 			g.setColor(Color.red);
 			g.drawRect(getX() + colX, getY() + colY, colWidth, colHeight);
-			
-			
-			g.setColor(Color.black);
-			g.setFont(new Font("arial", Font.BOLD, 12));
-			g.drawString((int) ((curLife / maxLife) * 100) + "%", getX(), getY());
 		
 		}
 		
-		/* Rendering the player sprite: */
+		/* Rendering the sprite: */
 		g.drawImage(sprite, (int) posX, (int) posY, null);
 		
-		
-		/* Rendering as a rectangle while we don't have sprites: */
-		/*
-		g.setColor(Color.GREEN);
-		g.drawRect((int) posX, (int) posY, width, height); */
 		
 	}	
 	
@@ -175,40 +171,27 @@ public class Entity {
 // --------------------------------------------------------------------------------------------------------------------- //
 	
 	
-	/* Every entity can be destroyed, that means being taken out of the game. */
+	/* Every thing can be destroyed, that means being taken out of the game. */
 	
 	public void destroyObject() {
 		
-		Game.allEntities.remove(this);
-		
-		Game.bullets.remove(this);
-		
+		Game.collectables.remove(this);
 		return;
+		
 	}
-
+	
+	
 	
 // --------------------------------------------------------------------------------------------------------------------- //
 	
-	/* Every entity can die, so we will have a die method. */
-		
-	public void die() {
 	
-		this.posY += gravity;			
+	/* Every thing can be destroyed, that means being taken out of the game. */
+	
+	public void collect() {
+		
+		collected = true;	
 		
 	}
-		
-		
-// ----------------------------------------------------------------------------------------------------------------------- //
 	
-		/* Although it will be different for each entity, all entities can take damage, so we'll have a method for
-		 * it. The main reason is that we can acess it from the class entity.	 */
-	
-		public void takeDamage(double damage) {
-			
-			curLife -= damage;
-			
-			if (curLife <= 0) {
-				curLife = 0;
-			}
-		}
+
 }

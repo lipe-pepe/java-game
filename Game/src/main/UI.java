@@ -52,7 +52,7 @@ public class UI {
 		g.drawImage(bulletIcon, bulletsPosX, bulletsPosY, 20*UI_SCALE, 20*UI_SCALE, null);
 		g.setColor(scoreColor);
 		g.setFont(Game.gameFont.deriveFont(30f));
-		g.drawString(""+ Game.bulletsAmount, bulletsPosX + 80, bulletsPosY + 40);
+		g.drawString(""+ Game.ammo, bulletsPosX + 80, bulletsPosY + 40);
 		
 		
 		// Showing the score:

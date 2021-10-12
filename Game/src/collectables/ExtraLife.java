@@ -1,31 +1,20 @@
-/* --- Flying Kittens ---	
- * 
- * Author: Felipe Pêpe da Silva Oliveira
- * Date: 29/07/2021
- */
-
-
-package entities;
+package collectables;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 import main.Game;
 
-public class FriendBalloon extends Entity {
+public class ExtraLife extends Collectable {
 
-
-	public BufferedImage FLYING_SPRITE = Game.spritesheet.getSprite(0, 96, 32, 64);
-	
-	private double speed = 1;
+	public BufferedImage SPRITE = Game.spritesheet.getSprite(128, 288, 32, 32);
 	
 	
-// -------------------------------------------------------------------------------------------------------------- //	
+// --------------------------------------------------------------------------------------------------------------------- //
 	
+	/* Constructor method */
 	
-	/* The constructor method: */
-	
-	public FriendBalloon(double x, double y, int width, int height, BufferedImage sprite) {
+	public ExtraLife(double x, double y, int width, int height, BufferedImage sprite) {
 		super(x, y, width, height, sprite);
 		
 		colX = 2;
@@ -33,9 +22,9 @@ public class FriendBalloon extends Entity {
 		colWidth = 29;
 		colHeight = 44;
 		
-		maxLife = 3;
-		curLife = maxLife;
+		sprite = SPRITE;
 	}
+	
 	
 	
 // --------------------------------------------------------------------------------------------------------------- //
@@ -48,32 +37,20 @@ public class FriendBalloon extends Entity {
 		// Moving left:
 		this.posX -= speed;	
 		
-		
-		// --- Checking life: ---
-	
-		if (curLife <= 0) {
-			die();
-		}
-		
-
 		super.tick();
 	
 	}
 	
-
-	
-	
 	
 // ---------------------------------------------------------------------------------------------------------------- //
-	
+
 /* The render method does all of the rendering. */
 	
 	public void render(Graphics g) {
 		
-		sprite = FLYING_SPRITE;
-		
 		super.render(g);	
 		
 	}
+	
 
 }
